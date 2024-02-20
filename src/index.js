@@ -12,11 +12,6 @@ class Vector2D {
     this.y = y;
   }
   
-  add(v) {
-    this.x += v.x;
-    this.y += v.y;
-  }
-  
   distance(v) {
     return Math.sqrt((v.x - this.x) ** 2 + (v.y - this.y) ** 2);
   }
@@ -43,26 +38,6 @@ class Character {
     this.#container.appendChild(this.#character);
     document.body.appendChild(this.#container);
     this.#displayModal({ characterPos: this.#position, textData: this.#textData });
-  }
-
-  #getCharacterPosition({ characterPosition, nodeRect }) {
-    const [horizontal, vertical] = this.#placement(new Vector2D(nodeRect.x, nodeRect.y), nodeRect.right , DEFAULT_CHARACTER_SIZE);
-
-    let newPosition;
-    // Set the position of the character
-    if (horizontal === "left") {
-      newPosition = new Vector2D(nodeRect.x, characterPosition.y);
-    } else {
-      newPosition = new Vector2D(nodeRect.right - DEFAULT_CHARACTER_SIZE, characterPosition.y);
-    }
-
-    if (vertical === "top") {
-      newPosition = new Vector2D(newPosition.x, nodeRect.y - DEFAULT_CHARACTER_SIZE);
-    } else {
-      newPosition = new Vector2D(newPosition.x, nodeRect.bottom + 0);
-    }
-
-    return newPosition;
   }
 
   #gotoNextNode() {
@@ -134,8 +109,28 @@ class Character {
     }
   }
 
+  #getCharacterPosition({ characterPosition, nodeRect }) {
+    const [horizontal, vertical] = this.#placement(new Vector2D(nodeRect.x, nodeRect.y), nodeRect.right , DEFAULT_CHARACTER_SIZE);
+
+    let newPosition;
+    // Set the position of the character
+    if (horizontal === "left") {
+      newPosition = new Vector2D(nodeRect.x, characterPosition.y);
+    } else {
+      newPosition = new Vector2D(nodeRect.right - DEFAULT_CHARACTER_SIZE, characterPosition.y);
+    }
+
+    if (vertical === "top") {
+      newPosition = new Vector2D(newPosition.x, nodeRect.y - DEFAULT_CHARACTER_SIZE);
+    } else {
+      newPosition = new Vector2D(newPosition.x, nodeRect.bottom + 0);
+    }
+
+    return newPosition;
+  }
+
   #updateCharacterAnim({ scale, state }) {
-    this.#character.src = `./gif/${state}.gif`;
+    this.#character.src = `https://raw.githubusercontent.com/apurbalal/intro-master/main/src/gif/${state}.gif`;
     this.#character.style.transform = `scaleX(${scale})`;
   }
 

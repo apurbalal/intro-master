@@ -6,6 +6,7 @@ This will show one by one tutorial of your website for your new users!
 
 ## Setup guide
 - Download the script https://github.com/apurbalal/intro-master/blob/main/src/index.js.
+- Add `data-tutorial` and `data-tutorial-description` to the dom elements, and the character will show it one by one.
 - Host it along with your website and include the script in your html document.
 
 ## Development
